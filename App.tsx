@@ -11,7 +11,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="UserRoom" component={UserRoomScreen} />
+        <Stack.Screen name="UserRoom" component={UserRoomScreen} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
