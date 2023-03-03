@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import * as Icon from "react-native-heroicons/outline";
 
@@ -6,9 +6,9 @@ const MainLayout = ({ children }) => {
   return (
     <View className="bg-[#000000]">
       <View className="h-full">
-        <View className="flex-1">
+        <ScrollView className="flex-1">
           {children}
-        </View>
+        </ScrollView>
         <View className="flex-row py-2 px-2 justify-between bg-[#121212]">
           <TouchableOpacity className="items-center w-1/5">
             <Icon.HomeIcon className="" color="white" />
