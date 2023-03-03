@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import * as Icon from "react-native-heroicons/outline";
 

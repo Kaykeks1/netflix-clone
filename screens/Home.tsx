@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
