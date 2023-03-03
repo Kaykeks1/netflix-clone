@@ -1,5 +1,4 @@
 import React from 'react'
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import * as Icon from "react-native-heroicons/mini";
 import * as SolidIcon from "react-native-heroicons/solid";
@@ -64,7 +63,6 @@ const UserRoom = () => {
           </View>
         </View>
       </View>
-      {/* <StatusBar style="auto" /> */}
     </SafeAreaView>
   )
 }
