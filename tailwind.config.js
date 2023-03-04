@@ -10,8 +10,8 @@ module.exports = {
         '11/20': '55%',
       }
     },
-    fontSize: {
-      'tiny': '.2725rem',
-    }
+    // fontSize: {
+    //   'tiny': '.2725rem',
+    // }
   }
 }
