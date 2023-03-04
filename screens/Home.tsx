@@ -1,11 +1,11 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
 import * as OutlineIcon from "react-native-heroicons/outline";
 
 const Home = () => {
-  const [previews, setPreviews] = useState([1]);
+  const [previews, setPreviews] = useState([1,1,1,1,1]);
 
   return (
     <MainLayout>
@@ -48,23 +48,50 @@ const Home = () => {
             </Text>
           </TouchableOpacity>
         </View>
+        {/* Previews */}
         <View className='px-5'>
           <View className="mt-6">
             <Text className="text-white text-3xl">Previews</Text>
           </View>
-          {
-            previews.map((i, key) => (
-              <TouchableOpacity key={key} className="rounded">
-                {/* <Image
-                  source={require('../assets/HomeImage.png')}
-                /> */}
-              </TouchableOpacity>
-            ))
-          }
+          <ScrollView
+            className="space-x-5"
+            contentContainerStyle={{
+              paddingTop: 20
+            }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {
+              previews.map((i, key) => (
+                <TouchableOpacity key={key} className="">
+                  <Image
+                    source={require('../assets/HomeImage.png')}
+                    className="rounded-full w-32 h-32"
+                    // style={styles.img}
+                  />
+                </TouchableOpacity>
+              ))
+            }
+          </ScrollView>
+        </View>
+        {/* Continue watching */}
+        <View className='px-5'>
+          <View className="mt-6">
+            <Text className="text-white text-2xl">Continue Watching for Emenalo</Text>
+          </View>
+          
         </View>
       </View>
     </MainLayout>
   )
 }
+
+// const styles = StyleSheet.create({
+//   img: {
+//     height: 80,
+//     width: 80,
+//     borderRadius: 40,
+//   },
+// });
 
 export default Home
