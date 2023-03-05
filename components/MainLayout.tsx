@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as Icon from "react-native-heroicons/outline";
+import { useNavigation } from '@react-navigation/native';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, routeName }) => {
+  const navigation = useNavigation()
   return (
     <View className="bg-[#000000]">
       <View className="h-full">
@@ -10,25 +12,25 @@ const MainLayout = ({ children }) => {
           {children}
         </ScrollView>
         <View className="flex-row py-2 px-2 justify-between bg-[#121212]">
-          <TouchableOpacity className="items-center w-1/5">
-            <Icon.HomeIcon className="" color="white" />
-            <Text className="text-white text-xs">Home</Text>
+          <TouchableOpacity className="items-center w-1/5" onPress={() => navigation.navigate('Home')}>
+            <Icon.HomeIcon className="" color={routeName === 'Home' ? "white" : "gray"} />
+            <Text className={`${routeName === 'Home' ? 'text-white' : 'text-gray-500'} text-xs`}>Home</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="items-center w-1/5">
-            <Icon.MagnifyingGlassIcon className="" color="gray" />
-            <Text className="text-gray-500 text-xs">Search</Text>
+          <TouchableOpacity className="items-center w-1/5" onPress={() => navigation.navigate('Search')}>
+            <Icon.MagnifyingGlassIcon className="" color={routeName === 'Search' ? "white" : "gray"} />
+            <Text className={`${routeName === 'Search' ? 'text-white' : 'text-gray-500'} text-xs`}>Search</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="items-center w-1/5">
-            <Icon.PlayIcon className="" color="gray" />
-            <Text className="text-gray-500 text-xs">Coming Soon</Text>
+          <TouchableOpacity className="items-center w-1/5" onPress={() => navigation.navigate('ComingSoon')}>
+            <Icon.PlayIcon className="" color={routeName === 'ComingSoon' ? "white" : "gray"} />
+            <Text className={`${routeName === 'ComingSoon' ? 'text-white' : 'text-gray-500'} text-xs`}>Coming Soon</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="items-center w-1/5">
-            <Icon.ArrowDownTrayIcon className="" color="gray" />
-            <Text className="text-gray-500 text-xs">Downloads</Text>
+          <TouchableOpacity className="items-center w-1/5" onPress={() => navigation.navigate('Downloads')}>
+            <Icon.ArrowDownTrayIcon className="" color={routeName === 'Downloads' ? "white" : "gray"} />
+            <Text className={`${routeName === 'Downloads' ? 'text-white' : 'text-gray-500'} text-xs`}>Downloads</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="items-center w-1/5">
-            <Icon.Bars3Icon className="" color="gray" />
-            <Text className="text-gray-500 text-xs">More</Text>
+          <TouchableOpacity className="items-center w-1/5" onPress={() => navigation.navigate('More')}>
+            <Icon.Bars3Icon className="" color={routeName === 'More' ? "white" : "gray"} />
+            <Text className={`${routeName === 'More' ? 'text-white' : 'text-gray-500'} text-xs`}>More</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -6,9 +6,6 @@ import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
 
 const Home = ({route}) => {
-  useEffect(() => {
-    console.log({route})
-  }, [route])
   const initialCategories = [
     { name: "Popular on Netflix", items: [1,1,1,1,1] },
     { name: "Trending Now", items: [1,1,1,1,1] },
