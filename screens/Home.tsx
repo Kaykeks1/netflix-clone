@@ -1,14 +1,23 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
 import * as OutlineIcon from "react-native-heroicons/outline";
+import ContinueWatching from '../components/ContinueWatching';
 
-const Home = () => {
+const Home = ({route}) => {
+  const initialCategories = [
+    { name: "Popular on Netflix", items: [1,1,1,1,1] },
+    { name: "Trending Now", items: [1,1,1,1,1] },
+    { name: "Top 10 in Nigeria Today", items: [1,1,1,1,1] },
+    { name: "My List", items: [1,1,1,1,1] },
+    { name: "African movies", items: [1,1,1,1,1] },
+  ]
   const [previews, setPreviews] = useState([1,1,1,1,1]);
+  const [categories, setCategories] = useState(initialCategories);
 
   return (
-    <MainLayout>
+    <MainLayout routeName={route.name}>
       <View className="">
         <Image
           source={require('../assets/HomeImage.png')}
@@ -48,13 +57,14 @@ const Home = () => {
             </Text>
           </TouchableOpacity>
         </View>
+
         {/* Previews */}
         <View className='px-5'>
           <View className="mt-6">
-            <Text className="text-white text-3xl">Previews</Text>
+            <Text className="text-white font-bold text-3xl">Previews</Text>
           </View>
           <ScrollView
-            className="space-x-5"
+            className="space-x-2"
             contentContainerStyle={{
               paddingTop: 20
             }}
@@ -66,7 +76,7 @@ const Home = () => {
                 <TouchableOpacity key={key} className="">
                   <Image
                     source={require('../assets/HomeImage.png')}
-                    className="rounded-full w-32 h-32"
+                    className="rounded-full w-28 h-28"
                     // style={styles.img}
                   />
                 </TouchableOpacity>
@@ -74,12 +84,56 @@ const Home = () => {
             }
           </ScrollView>
         </View>
+
         {/* Continue watching */}
         <View className='px-5'>
           <View className="mt-6">
-            <Text className="text-white text-2xl">Continue Watching for Emenalo</Text>
+            <Text className="text-white font-bold text-2xl">Continue Watching for Emenalo</Text>
           </View>
-          
+          <ScrollView
+            contentContainerStyle={{
+              paddingTop: 20
+            }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+
+            {
+              previews.map((i, key) => (
+                <ContinueWatching
+                  key={key}
+                />
+              ))
+            }
+          </ScrollView>
+
+          {/* Categories */}
+          {
+            categories.map((category, key) => (
+              <View key={key}>
+                <View className="mt-6">
+                  <Text className="text-white font-bold text-2xl">{category.name}</Text>
+                </View>
+                <ScrollView
+                  contentContainerStyle={{
+                    paddingTop: 20
+                  }}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                >
+                  {
+                    category.items.map((item, key) => (
+                      <Image
+                        key={key}
+                        source={require('../assets/HomeImage.png')}
+                        className="w-28 h-48 mr-2"
+                      />
+                    ))
+                  }
+                </ScrollView>
+              </View>
+            ))
+          }
         </View>
       </View>
     </MainLayout>
