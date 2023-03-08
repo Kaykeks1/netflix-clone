@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
@@ -139,13 +139,5 @@ const Home = ({route}) => {
     </MainLayout>
   )
 }
-
-// const styles = StyleSheet.create({
-//   img: {
-//     height: 80,
-//     width: 80,
-//     borderRadius: 40,
-//   },
-// });
 
 export default Home
