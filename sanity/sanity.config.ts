@@ -6,7 +6,7 @@ import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'netflix-clone',
+  title: 'netflix-clone-api',
 
   projectId: 'lsi8clrd',
   dataset: 'production',
