@@ -24,7 +24,7 @@ export default defineType({
       name: "description",
       type: "string",
       title: "Description",
-      validation: (Rule: any) => Rule.max(200)
+      // validation: (Rule: any) => Rule.max(200)
     }),
     defineField({
       name: 'maturityRating',
@@ -37,6 +37,14 @@ export default defineType({
       type: 'array',
       // of: [{ type: 'category' }]
       of: [{ type: "reference", to: [{ type: "category" }] }]
+    }),
+    defineField({
+      name: 'thumbnail',
+      title: 'Thumbnail',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
   ]
 })
