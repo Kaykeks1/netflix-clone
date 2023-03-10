@@ -24,7 +24,6 @@ export default defineType({
       name: "description",
       type: "string",
       title: "Description",
-      // validation: (Rule: any) => Rule.max(200)
     }),
     defineField({
       name: 'maturityRating',
@@ -35,7 +34,6 @@ export default defineType({
       name: 'category',
       title: 'Category',
       type: 'array',
-      // of: [{ type: 'category' }]
       of: [{ type: "reference", to: [{ type: "category" }] }]
     }),
     defineField({
