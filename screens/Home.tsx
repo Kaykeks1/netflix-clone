@@ -4,8 +4,19 @@ import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
 import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
+import sanityClient from '../sanity';
 
 const Home = ({route}) => {
+  useEffect(() => {
+    sanityClient.fetch(`*[_type == "category"] {
+      ...,
+      "videos": *[_type=="video" && references(^._id)] {
+        ...
+      }
+    }`).then(data => {
+      console.log(data)
+    }).catch(e => console.log({e}))
+  }, [])
   const initialCategories = [
     { name: "Popular on Netflix", items: [1,1,1,1,1] },
     { name: "Trending Now", items: [1,1,1,1,1] },
