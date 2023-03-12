@@ -7,6 +7,7 @@ import ComingSoonScreen from './screens/ComingSoon'
 import DownloadsScreen from './screens/Downloads'
 import MoreScreen from './screens/More'
 import { NativeWindStyleSheet } from "nativewind";
+import 'react-native-url-polyfill/auto';
 
 const Stack = createNativeStackNavigator();
 NativeWindStyleSheet.setOutput({ web: 'native' })
