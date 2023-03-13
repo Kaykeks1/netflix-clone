@@ -5,8 +5,14 @@ import * as Icon from "react-native-heroicons/solid";
 import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
 import sanityClient from '../sanity';
+import { useAppSelector, useAppDispatch } from '../hooks'
+import { setHomeCategories } from '../features/videoSlice'
+import { selectCategories } from '../features/videoSlice';
 
 const Home = ({route}) => {
+  const dispatch = useAppDispatch()
+  const categories = useAppSelector(selectCategories);
+
   useEffect(() => {
     sanityClient.fetch(`*[_type == "category"] {
       ...,
@@ -14,9 +20,13 @@ const Home = ({route}) => {
         ...
       }
     }`).then(data => {
-      console.log(data)
+      // console.log(data)
+      dispatch(setHomeCategories(data))
     }).catch(e => console.log({e}))
-  }, [])
+  }, [dispatch])
+  // console.log({categories})
+
+
   const initialCategories = [
     { name: "Popular on Netflix", items: [1,1,1,1,1] },
     { name: "Trending Now", items: [1,1,1,1,1] },
@@ -25,7 +35,7 @@ const Home = ({route}) => {
     { name: "African movies", items: [1,1,1,1,1] },
   ]
   const [previews, setPreviews] = useState([1,1,1,1,1]);
-  const [categories, setCategories] = useState(initialCategories);
+  // const [categories, setCategories] = useState(categories_);
 
   return (
     <MainLayout routeName={route.name}>
