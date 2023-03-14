@@ -4,13 +4,15 @@ import MainLayout from '../components/MainLayout'
 import * as Icon from "react-native-heroicons/solid";
 import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
-import sanityClient from '../sanity';
+import sanityClient, { urlFor } from '../sanity';
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { setHomeCategories } from '../features/videoSlice'
 import { selectCategories } from '../features/videoSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = ({route}) => {
   const dispatch = useAppDispatch()
+  const navigation = useNavigation()
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
@@ -144,11 +146,16 @@ const Home = ({route}) => {
                 >
                   {
                     category.items.map((item, key) => (
-                      <Image
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("ShortDetails")}
                         key={key}
-                        source={require('../assets/HomeImage.png')}
-                        className="w-28 h-48 mr-2"
-                      />
+                      >
+                        <Image
+                          // source={require('../assets/HomeImage.png')}
+                          source={{ uri: urlFor(item.thumbnail).url() }}
+                          className="w-28 h-48 mr-2"
+                        />
+                      </TouchableOpacity>
                     ))
                   }
                 </ScrollView>
