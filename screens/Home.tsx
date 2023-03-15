@@ -6,8 +6,8 @@ import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
 import sanityClient, { urlFor } from '../sanity';
 import { useAppSelector, useAppDispatch } from '../hooks'
-import { setHomeCategories } from '../features/videoSlice'
-import { selectCategories } from '../features/videoSlice';
+import { setHomeCategories, selectCategories } from '../features/videoSlice'
+import { toggleShortDetailsVisibility } from '../features/appSlice'
 import { useNavigation } from '@react-navigation/native';
 
 const Home = ({route}) => {
@@ -147,7 +147,7 @@ const Home = ({route}) => {
                   {
                     category.items.map((item, key) => (
                       <TouchableOpacity
-                        onPress={() => navigation.navigate("ShortDetails")}
+                        onPress={() => dispatch(toggleShortDetailsVisibility())}
                         key={key}
                       >
                         <Image
