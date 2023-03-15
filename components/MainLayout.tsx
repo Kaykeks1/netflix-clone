@@ -2,11 +2,16 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import * as Icon from "react-native-heroicons/outline";
 import { useNavigation } from '@react-navigation/native';
+import ShortDetails from './ShortDetails';
+import { selectShortDetailsVisibility } from '../features/appSlice';
+import { useAppSelector } from '../hooks'
 
 const MainLayout = ({ children, routeName }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const showShortDetails = useAppSelector(selectShortDetailsVisibility);
+
   return (
-    <View className="bg-[#000000]">
+    <View className="bg-[#000000] relative">
       <View className="h-full">
         <ScrollView className="flex-1">
           {children}
@@ -34,6 +39,9 @@ const MainLayout = ({ children, routeName }) => {
           </TouchableOpacity>
         </View>
       </View>
+      {
+        showShortDetails && <ShortDetails />
+      }
     </View>
   )
 }

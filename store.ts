@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import videoReducer from './features/videoSlice'
+import appReducer from './features/appSlice'
 
 export const store = configureStore({
   reducer: {
     videos: videoReducer,
+    app: appReducer,
   },
 })
 
