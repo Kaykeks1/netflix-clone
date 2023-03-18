@@ -3,13 +3,31 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 // Define a type for the slice state
+
+interface videoDetailsType {
+  name:string,
+  description:string,
+  year:string,
+  duration:string,
+  maturityRating:string,
+  thumbnail:object
+}
 interface VideoState {
-  categories: Array<object>
+  categories: Array<object>,
+  videoDetails: videoDetailsType
 }
 
 // Define the initial state using that type
 const initialState: VideoState = {
   categories: [],
+  videoDetails: {
+    name: '',
+    description: '',
+    year: '',
+    duration: '',
+    maturityRating: '',
+    thumbnail: {},
+  }
 }
 
 export const videoSlice = createSlice({
@@ -22,8 +40,7 @@ export const videoSlice = createSlice({
       const {payload} = action
       state.categories = payload.map((item:{name: string, videos: object[]}) => ({
         name: item.name,
-        items: item.videos.map((vid:any) => ({
-          type: vid.type,
+        items: item.videos.map((vid:videoDetailsType) => ({
           description: vid.description,
           duration: vid.duration,
           maturityRating: vid.maturityRating,
@@ -33,12 +50,17 @@ export const videoSlice = createSlice({
         }))
       }))
     },
+    setVideoDetails: (state, action: PayloadAction<videoDetailsType>) => {
+      const { payload } = action
+      state.videoDetails = payload;
+    }
   },
 })
 
-export const { setHomeCategories } = videoSlice.actions
+export const { setHomeCategories, setVideoDetails } = videoSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCategories = (state: RootState) => state.videos.categories
+export const selectVideoDetails = (state: RootState) => state.videos.videoDetails
 
 export default videoSlice.reducer

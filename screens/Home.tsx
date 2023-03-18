@@ -6,7 +6,7 @@ import * as OutlineIcon from "react-native-heroicons/outline";
 import ContinueWatching from '../components/ContinueWatching';
 import sanityClient, { urlFor } from '../sanity';
 import { useAppSelector, useAppDispatch } from '../hooks'
-import { setHomeCategories, selectCategories } from '../features/videoSlice'
+import { setHomeCategories, selectCategories, setVideoDetails } from '../features/videoSlice'
 import { toggleShortDetailsVisibility } from '../features/appSlice'
 import { useNavigation } from '@react-navigation/native';
 
@@ -38,6 +38,11 @@ const Home = ({route}) => {
   ]
   const [previews, setPreviews] = useState([1,1,1,1,1]);
   // const [categories, setCategories] = useState(categories_);
+
+  const openVideoDetails = (data) => {
+    dispatch(setVideoDetails(data))
+    dispatch(toggleShortDetailsVisibility())
+  }
 
   return (
     <MainLayout routeName={route.name}>
@@ -132,7 +137,7 @@ const Home = ({route}) => {
 
           {/* Categories */}
           {
-            categories.map((category, key) => (
+            categories.map((category:{name: string, items: object[]}, key) => (
               <View key={key}>
                 <View className="mt-6">
                   <Text className="text-white font-bold text-2xl">{category.name}</Text>
@@ -145,9 +150,9 @@ const Home = ({route}) => {
                   showsHorizontalScrollIndicator={false}
                 >
                   {
-                    category.items.map((item, key) => (
+                    category.items.map((item:{thumbnail:object}, key) => (
                       <TouchableOpacity
-                        onPress={() => dispatch(toggleShortDetailsVisibility())}
+                        onPress={() => openVideoDetails(item)}
                         key={key}
                       >
                         <Image
