@@ -7,11 +7,13 @@ import { useAppSelector, useAppDispatch } from '../hooks'
 import { toggleShortDetailsVisibility, selectShortDetailsVisibility } from '../features/appSlice'
 import { selectVideoDetails } from '../features/videoSlice';
 import { urlFor } from '../sanity'
+import { useNavigation } from '@react-navigation/native';
 
 const ShortDetails = () => {
   const dispatch = useAppDispatch()
   const showShortDetails = useAppSelector(selectShortDetailsVisibility);
   const videoDetails = useAppSelector(selectVideoDetails);
+  const navigation = useNavigation()
 
   return (
     <Animatable.View
@@ -44,10 +46,10 @@ const ShortDetails = () => {
           </View>
         </View>
         <View className="flex-row justify-around mt-3">
-          <View className="items-center">
+          <TouchableOpacity className="items-center" onPress={() => navigation.navigate("VideoPlayer")}>
             <Icon.PlayCircleIcon color="white" size={40} />
             <Text className="text-[#737373] mt-1">Play</Text>
-          </View>
+          </TouchableOpacity>
           <View className="items-center">
             <Icon.PlusCircleIcon color="white" size={40} />
             <Text className="text-[#737373] mt-1">My List</Text>
