@@ -25,7 +25,6 @@ const VideoPlayer = () => {
       navigation.goBack()
     }
   }
-  console.log({orientationIsLandscape})
   return (
     <View className='flex-1 justify-center bg-black relative'>
       <Video
