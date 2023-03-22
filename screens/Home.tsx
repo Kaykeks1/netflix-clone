@@ -22,11 +22,9 @@ const Home = ({route}) => {
         ...
       }
     }`).then(data => {
-      // console.log(data)
       dispatch(setHomeCategories(data))
     }).catch(e => console.log({e}))
   }, [dispatch])
-  // console.log({categories})
 
 
   const initialCategories = [
@@ -37,7 +35,6 @@ const Home = ({route}) => {
     { name: "African movies", items: [1,1,1,1,1] },
   ]
   const [previews, setPreviews] = useState([1,1,1,1,1]);
-  // const [categories, setCategories] = useState(categories_);
 
   const openVideoDetails = (data) => {
     dispatch(setVideoDetails(data))
@@ -105,7 +102,6 @@ const Home = ({route}) => {
                   <Image
                     source={require('../assets/HomeImage.png')}
                     className="rounded-full w-28 h-28"
-                    // style={styles.img}
                   />
                 </TouchableOpacity>
               ))
@@ -156,7 +152,6 @@ const Home = ({route}) => {
                         key={key}
                       >
                         <Image
-                          // source={require('../assets/HomeImage.png')}
                           source={{ uri: urlFor(item.thumbnail).url() }}
                           className="w-28 h-48 mr-2"
                         />
