@@ -8,11 +8,9 @@ import sanityClient, { urlFor } from '../sanity';
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { setHomeCategories, selectCategories, setVideoDetails } from '../features/videoSlice'
 import { toggleShortDetailsVisibility } from '../features/appSlice'
-import { useNavigation } from '@react-navigation/native';
 
 const Home = ({route}) => {
   const dispatch = useAppDispatch()
-  const navigation = useNavigation()
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
