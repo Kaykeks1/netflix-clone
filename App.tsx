@@ -5,7 +5,6 @@ import HomeScreen from './screens/Home'
 import SearchScreen from './screens/Search'
 import ComingSoonScreen from './screens/ComingSoon'
 import DownloadsScreen from './screens/Downloads'
-// import ShortDetailsScreen from './screens/ShortDetails'
 import MoreScreen from './screens/More'
 import VideoPlayerScreen from './screens/VideoPlayer'
 import { NativeWindStyleSheet } from "nativewind";
@@ -29,12 +28,6 @@ export default function App() {
           <Stack.Screen name="Downloads" component={DownloadsScreen} options={{headerShown: false}} />
           <Stack.Screen name="More" component={MoreScreen} options={{headerShown: false}} />
           <Stack.Screen name="VideoPlayer" component={VideoPlayerScreen} options={{headerShown: false}} />
-          {/* <Stack.Screen
-            name="ShortDetails"
-            component={ShortDetailsScreen}
-            // options={{headerShown: false, presentation: "modal", headerMode: "float"}}
-            options={{headerShown: false, presentation: "modal"}}
-          /> */}
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
