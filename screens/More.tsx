@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 import MainLayout from '../components/MainLayout'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const More = ({ route }) => {
   return (
