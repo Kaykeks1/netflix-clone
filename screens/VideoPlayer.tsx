@@ -100,15 +100,6 @@ const VideoPlayer = () => {
           <Text className='text-white'>0:00</Text>
         </View>
       </View>
-
-      {/* <View>
-        <Button
-          title={status.isPlaying ? 'Pause' : 'Play'}
-          onPress={() =>
-            status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-          }
-        />
-      </View> */}
     </View>
   )
 }
