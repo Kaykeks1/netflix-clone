@@ -22,6 +22,15 @@ const VideoPlayer = () => {
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT)
     }
   }, [])
+  useEffect(() => {
+    console.log({status})
+    if (status.durationMillis) {
+      setProgress((status.positionMillis || 0) / (status.durationMillis))
+    }
+    if (status.didJustFinish) {
+      video.current.pauseAsync()
+    }
+  }, [status])
 
   const handleBackNavigation = async () => {
     if (orientationIsLandscape) {
@@ -85,8 +94,8 @@ const VideoPlayer = () => {
           <View className="flex-1">
             <ProgressBar
               className=""
-              // progress={state.progress}
-              progress={0.5}
+              progress={progress}
+              // progress={0.5}
               color="red"
               unfilledColor="rgba(255,255,255,.5)"
               borderColor="#FFF"
