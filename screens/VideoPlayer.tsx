@@ -55,9 +55,6 @@ const VideoPlayer = () => {
         source={{
           uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
         }}
-        // useNativeControls
-        // orientation="landscape"
-        // resizeMode="contain"
         isLooping
         onPlaybackStatusUpdate={status => setStatus(() => status)}
       />
@@ -94,8 +91,7 @@ const VideoPlayer = () => {
           <View className="flex-1">
             <ProgressBar
               className=""
-              progress={progress}
-              // progress={0.5}
+              progress={progress} // 0 to 1
               color="red"
               unfilledColor="rgba(255,255,255,.5)"
               borderColor="#FFF"
