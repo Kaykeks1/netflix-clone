@@ -14,6 +14,8 @@ const VideoPlayer = () => {
   const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [progressLayout, setProgressLayout] = useState({});
+  const [positionInMillis, setPositionInMillis] = useState(0);
 
 
   useEffect(() => {
@@ -23,7 +25,7 @@ const VideoPlayer = () => {
     }
   }, [])
   useEffect(() => {
-    console.log({status})
+    // console.log({status})
     if (status.durationMillis) {
       setProgress((status.positionMillis || 0) / (status.durationMillis))
     }
@@ -40,12 +42,20 @@ const VideoPlayer = () => {
   }
 
   const handleProgressPress = e => {
-    const position = e.nativeEvent.locationX;
-    // const progress = (position / 250) * this.state.duration;
-    // const isPlaying = !this.state.paused;
-    
-    // this.player.seek(progress);
+    if (progressLayout.width) {
+      const position = e.nativeEvent.locationX;
+      console.log({position, width: progressLayout.width})
+      setProgress(position / progressLayout.width)
+      setPositionInMillis((position / progressLayout.width) * status.durationMillis);
+      
+
+    }
   };
+
+  const secondsToTime = (time) => {
+    console.log({time})
+    return ~~(time / 60) + ":" + (time % 60 < 10 ? "0" : "") + time % 60;
+  }
 
   return (
     <View className='flex-1 justify-center bg-black relative'>
@@ -57,6 +67,7 @@ const VideoPlayer = () => {
         }}
         isLooping
         onPlaybackStatusUpdate={status => setStatus(() => status)}
+        positionMillis={positionInMillis}
       />
       {/* controls */}
       <TouchableOpacity className='absolute top-0 ml-8 my-4' onPress={handleBackNavigation}>
@@ -86,8 +97,12 @@ const VideoPlayer = () => {
         />
       </View>
 
-      <View className='absolute bottom-12 flex-row mx-6'>
-        <TouchableWithoutFeedback  onPress={handleProgressPress} className="w-full">
+      <View className='absolute bottom-12 flex-row mx-6 items-center'>
+        <TouchableWithoutFeedback
+          onPress={handleProgressPress}
+          className="w-full h-6"
+          onLayout={(event) => setProgressLayout(event.nativeEvent.layout)}
+        >
           <View className="flex-1">
             <ProgressBar
               className=""
@@ -102,7 +117,7 @@ const VideoPlayer = () => {
           </View>
         </TouchableWithoutFeedback>
         <View className='ml-2'>
-          <Text className='text-white'>0:00</Text>
+          <Text className='text-white'>{secondsToTime(Math.floor(progress * (status.durationMillis/1000)))}</Text>
         </View>
       </View>
     </View>
