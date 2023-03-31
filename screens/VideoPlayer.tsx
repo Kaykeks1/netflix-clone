@@ -44,7 +44,7 @@ const VideoPlayer = () => {
   const handleProgressPress = e => {
     if (progressLayout.width) {
       const position = e.nativeEvent.locationX;
-      console.log({position, width: progressLayout.width})
+      // console.log({position, width: progressLayout.width})
       setProgress(position / progressLayout.width)
       setPositionInMillis((position / progressLayout.width) * status.durationMillis);
       
@@ -53,7 +53,6 @@ const VideoPlayer = () => {
   };
 
   const secondsToTime = (time) => {
-    console.log({time})
     return ~~(time / 60) + ":" + (time % 60 < 10 ? "0" : "") + time % 60;
   }
 
