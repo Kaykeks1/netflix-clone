@@ -92,7 +92,6 @@ const VideoPlayer = () => {
         </TouchableWithoutFeedback>
         <Image
           source={require('../assets/10SecsForward.png')}
-          className=""
         />
       </View>
 
