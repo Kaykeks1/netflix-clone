@@ -5,6 +5,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import * as Icon from "react-native-heroicons/solid";
 import { useNavigation } from '@react-navigation/native';
 import ProgressBar from "react-native-progress/Bar";
+import * as Animatable from 'react-native-animatable';
 
 const VideoPlayer = () => {
   const video = React.useRef(null);
@@ -69,12 +70,22 @@ const VideoPlayer = () => {
         positionMillis={positionInMillis}
       />
       {/* controls */}
-      <TouchableOpacity className='absolute top-0 ml-8 my-4' onPress={handleBackNavigation}>
-        <Icon.ArrowLeftIcon color="white" size={30} />
-      </TouchableOpacity>
-      <View className='absolute w-full top-0 my-4'>
+      <Animatable.View
+        className='absolute top-0 ml-8 my-4'
+        animation="slideInDown"
+        duration={200}
+      >
+        <TouchableOpacity onPress={handleBackNavigation}>
+          <Icon.ArrowLeftIcon color="white" size={30} />
+        </TouchableOpacity>
+      </Animatable.View>
+      <Animatable.View
+        className='absolute w-full top-0 my-4'
+        animation="slideInDown"
+        duration={200}
+      >
         <Text className=' text-center text-white'>Movie name</Text>
-      </View>
+      </Animatable.View>
       
       {/* middle controls */}
       {/* <View className='absolute top-0 border-2 border-white	w-full h-full justify-around items-center flex-row'> */}
@@ -95,7 +106,7 @@ const VideoPlayer = () => {
         />
       </View>
 
-      <View className='absolute bottom-12 flex-row mx-6 items-center'>
+      <View className='absolute bottom-16 flex-row mx-6 items-center'>
         <TouchableWithoutFeedback
           onPress={handleProgressPress}
           className="w-full h-6"
@@ -118,6 +129,47 @@ const VideoPlayer = () => {
           <Text className='text-white'>{secondsToTime(Math.floor(progress * (status.durationMillis/1000)))}</Text>
         </View>
       </View>
+      <Animatable.View
+        className='absolute bottom-8 flex-row w-full justify-around'
+        animation="slideInUp"
+        duration={200}
+      >
+        <View className='flex-row items-center'>
+          <Image
+            source={require('../assets/speed.png')}
+            className="mr-2"
+          />
+          <Text className='text-white'>Speed(1x)</Text>
+        </View>
+        <View className='flex-row items-center'>
+          <Image
+            source={require('../assets/lock.png')}
+            className="mr-2"
+          />
+          <Text className='text-white'>Lock</Text>
+        </View>
+        <View className='flex-row items-center'>
+          <Image
+            source={require('../assets/episodes.png')}
+            className="mr-2"
+          />
+          <Text className='text-white'>Episodes</Text>
+        </View>
+        <View className='flex-row items-center'>
+          <Image
+            source={require('../assets/subtitles.png')}
+            className="mr-2"
+          />
+          <Text className='text-white'>Audio & Subtitles</Text>
+        </View>
+        <View className='flex-row items-center'>
+          <Image
+            source={require('../assets/nextEpisode.png')}
+            className="mr-2"
+          />
+          <Text className='text-white'>Next Ep.</Text>
+        </View>
+      </Animatable.View>
     </View>
   )
 }
