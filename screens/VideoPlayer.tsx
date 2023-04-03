@@ -35,6 +35,8 @@ const VideoPlayer = () => {
     }
   }, [status])
 
+  // top contorls
+
   const handleBackNavigation = async () => {
     if (orientationIsLandscape) {
       await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
@@ -42,14 +44,66 @@ const VideoPlayer = () => {
     }
   }
 
+  // middle controls
+  let backCount = 0, action = '', backTimer
+  const doublePress = (actionType) => {
+    backCount++
+    console.log('here 1')
+    if (backCount == 2 && actionType === action) {
+        clearTimeout(backTimer);
+        backCount = 0;
+        action = '';
+        console.log('here 2')
+        // console.warn("Clicked twice");
+        switch (actionType) {
+          case 'goTenSecsBack': {
+            goTenSecsBack();
+            break
+          } case 'goTenSecsForward': {
+            goTenSecsForward();
+            break;
+          }
+        }
+    } else {
+      console.log('here 3')
+      backTimer = setTimeout(() => {
+        backCount = 0
+        action = '';
+      }, 500)
+    }
+    action = actionType
+  }
+
+  const goTenSecsBack = () => {
+    console.log("10 seconds back");
+    let tenSecsBack = status.positionMillis - (10 * 1000);
+    if (tenSecsBack < 0) {
+      setProgress(0)
+      setPositionInMillis(0);
+      return;
+    }
+    setProgress(tenSecsBack / status.durationMillis)
+    setPositionInMillis(tenSecsBack);
+  }
+
+  const goTenSecsForward = () => {
+    console.log("10 seconds forward");
+    let tenSecsForward = status.positionMillis + (10 * 1000);
+    if (tenSecsForward > status.durationMillis) {
+      setProgress(1)
+      setPositionInMillis(status.durationMillis);
+      return;
+    }
+    setProgress(tenSecsForward / status.durationMillis)
+    setPositionInMillis(tenSecsForward);
+  }
+
   const handleProgressPress = e => {
     if (progressLayout.width) {
       const position = e.nativeEvent.locationX;
       // console.log({position, width: progressLayout.width})
-      setProgress(position / progressLayout.width)
+      setProgress(position / progressLayout.width);
       setPositionInMillis((position / progressLayout.width) * status.durationMillis);
-      
-
     }
   };
 
@@ -90,10 +144,12 @@ const VideoPlayer = () => {
       {/* middle controls */}
       {/* <View className='absolute top-0 border-2 border-white	w-full h-full justify-around items-center flex-row'> */}
       <View className='absolute top-0	w-full h-full justify-around items-center flex-row'>
-        <Image
-          source={require('../assets/10SecsBack.png')}
-          className=""
-        />
+        <TouchableWithoutFeedback onPress={() => doublePress('goTenSecsBack')}>
+          <Image
+            source={require('../assets/10SecsBack.png')}
+            className=""
+          />
+        </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()}>
           {
             status.isPlaying
@@ -101,9 +157,11 @@ const VideoPlayer = () => {
               : <Icon.PlayIcon color="white" size={48} />
           }
         </TouchableWithoutFeedback>
-        <Image
-          source={require('../assets/10SecsForward.png')}
-        />
+        <TouchableWithoutFeedback onPress={() => doublePress('goTenSecsForward')}>
+          <Image
+            source={require('../assets/10SecsForward.png')}
+          />
+        </TouchableWithoutFeedback>
       </View>
 
       <View className='absolute bottom-16 flex-row mx-6 items-center'>
