@@ -1,6 +1,6 @@
-import { View, Text, Button, TouchableOpacity, TouchableWithoutFeedback, Image } from 'react-native'
+import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation'; 
 import * as Icon from "react-native-heroicons/solid";
 import { useNavigation } from '@react-navigation/native';
@@ -12,9 +12,7 @@ const VideoPlayer = () => {
   const [status, setStatus] = useState({});
   const [orientationIsLandscape, setOrientationIsLandscape] = useState(false)
   const navigation = useNavigation()
-  const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [progressLayout, setProgressLayout] = useState({});
   const [positionInMillis, setPositionInMillis] = useState(0);
 
@@ -36,7 +34,6 @@ const VideoPlayer = () => {
   }, [status])
 
   // top contorls
-
   const handleBackNavigation = async () => {
     if (orientationIsLandscape) {
       await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
@@ -54,7 +51,6 @@ const VideoPlayer = () => {
         backCount = 0;
         action = '';
         console.log('here 2')
-        // console.warn("Clicked twice");
         switch (actionType) {
           case 'goTenSecsBack': {
             goTenSecsBack();
@@ -98,10 +94,10 @@ const VideoPlayer = () => {
     setPositionInMillis(tenSecsForward);
   }
 
+  // bottom controls
   const handleProgressPress = e => {
     if (progressLayout.width) {
       const position = e.nativeEvent.locationX;
-      // console.log({position, width: progressLayout.width})
       setProgress(position / progressLayout.width);
       setPositionInMillis((position / progressLayout.width) * status.durationMillis);
     }
