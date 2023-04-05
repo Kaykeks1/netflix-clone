@@ -19,25 +19,25 @@ const VideoPlayer = () => {
 
   useEffect(() => {
     if (!orientationIsLandscape) {
-      setOrientationIsLandscape(true)
-      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT)
+      setOrientationIsLandscape(true);
+      ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
     }
   }, [])
   useEffect(() => {
     // console.log({status})
     if (status.durationMillis) {
-      setProgress((status.positionMillis || 0) / (status.durationMillis))
+      setProgress((status.positionMillis || 0) / (status.durationMillis));
     }
     if (status.didJustFinish) {
-      video.current.pauseAsync()
+      video.current.pauseAsync();
     }
   }, [status])
 
   // top contorls
   const handleBackNavigation = async () => {
     if (orientationIsLandscape) {
-      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
-      navigation.goBack()
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+      navigation.goBack();
     }
   }
 
@@ -45,7 +45,7 @@ const VideoPlayer = () => {
   let backCount = 0, action = '', backTimer
   const doublePress = (actionType) => {
     backCount++
-    console.log('here 1')
+    console.log('here 1');
     if (backCount == 2 && actionType === action) {
         clearTimeout(backTimer);
         backCount = 0;
@@ -65,20 +65,20 @@ const VideoPlayer = () => {
       backTimer = setTimeout(() => {
         backCount = 0
         action = '';
-      }, 500)
+      }, 500);
     }
-    action = actionType
+    action = actionType;
   }
 
   const goTenSecsBack = () => {
     console.log("10 seconds back");
     let tenSecsBack = status.positionMillis - (10 * 1000);
     if (tenSecsBack < 0) {
-      setProgress(0)
+      setProgress(0);
       setPositionInMillis(0);
       return;
     }
-    setProgress(tenSecsBack / status.durationMillis)
+    setProgress(tenSecsBack / status.durationMillis);
     setPositionInMillis(tenSecsBack);
   }
 
@@ -90,12 +90,12 @@ const VideoPlayer = () => {
       setPositionInMillis(status.durationMillis);
       return;
     }
-    setProgress(tenSecsForward / status.durationMillis)
+    setProgress(tenSecsForward / status.durationMillis);
     setPositionInMillis(tenSecsForward);
   }
 
   // bottom controls
-  const handleProgressPress = e => {
+  const handleProgressPress = (e) => {
     if (progressLayout.width) {
       const position = e.nativeEvent.locationX;
       setProgress(position / progressLayout.width);
@@ -105,7 +105,7 @@ const VideoPlayer = () => {
 
   const secondsToTime = (time) => {
     return ~~(time / 60) + ":" + (time % 60 < 10 ? "0" : "") + time % 60;
-  }
+  }l
 
   return (
     <View className='flex-1 justify-center bg-black relative'>
