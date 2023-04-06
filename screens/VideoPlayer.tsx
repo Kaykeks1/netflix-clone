@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
   const [orientationIsLandscape, setOrientationIsLandscape] = useState(false)
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [progress, setProgress] = useState(0);
   const [progressLayout, setProgressLayout] = useState({});
   const [positionInMillis, setPositionInMillis] = useState(0);
@@ -22,7 +22,7 @@ const VideoPlayer = () => {
       setOrientationIsLandscape(true);
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT);
     }
-  }, [])
+  }, []);
   useEffect(() => {
     // console.log({status})
     if (status.durationMillis) {
@@ -31,7 +31,7 @@ const VideoPlayer = () => {
     if (status.didJustFinish) {
       video.current.pauseAsync();
     }
-  }, [status])
+  }, [status]);
 
   // top contorls
   const handleBackNavigation = async () => {
@@ -63,7 +63,7 @@ const VideoPlayer = () => {
     } else {
       console.log('here 3')
       backTimer = setTimeout(() => {
-        backCount = 0
+        backCount = 0;
         action = '';
       }, 500);
     }
@@ -86,7 +86,7 @@ const VideoPlayer = () => {
     console.log("10 seconds forward");
     let tenSecsForward = status.positionMillis + (10 * 1000);
     if (tenSecsForward > status.durationMillis) {
-      setProgress(1)
+      setProgress(1);
       setPositionInMillis(status.durationMillis);
       return;
     }
@@ -105,7 +105,7 @@ const VideoPlayer = () => {
 
   const secondsToTime = (time) => {
     return ~~(time / 60) + ":" + (time % 60 < 10 ? "0" : "") + time % 60;
-  }l
+  };
 
   return (
     <View className='flex-1 justify-center bg-black relative'>
