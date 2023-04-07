@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 const VideoPlayer = () => {
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
-  const [orientationIsLandscape, setOrientationIsLandscape] = useState(false)
+  const [orientationIsLandscape, setOrientationIsLandscape] = useState(false);
   const navigation = useNavigation();
   const [progress, setProgress] = useState(0);
   const [progressLayout, setProgressLayout] = useState({});
@@ -42,7 +42,7 @@ const VideoPlayer = () => {
   }
 
   // middle controls
-  let backCount = 0, action = '', backTimer
+  let backCount = 0, action = '', backTimer;
   const doublePress = (actionType) => {
     backCount++
     console.log('here 1');
@@ -61,7 +61,7 @@ const VideoPlayer = () => {
           }
         }
     } else {
-      console.log('here 3')
+      console.log('here 3');
       backTimer = setTimeout(() => {
         backCount = 0;
         action = '';
