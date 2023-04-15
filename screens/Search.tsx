@@ -13,8 +13,8 @@ const Search = ({ route }) => {
     <MainLayout routeName={route.name}>
       <View>
         <Text className="text-white">Search</Text>
-        <View className="flex-row items-center space-x-2 pb-2">
-          <View className="flex-row flex-1 space-x-2 bg-[#424242] p-3 top-12">
+        {/* <View className="flex-row items-center space-x-2 pb-2"> */}
+          <View className="flex-row flex-1 space-x-2 bg-[#424242] p-5 top-12">
             <MagnifyingGlassIcon
               color="#C4C4C4"
               size={20}
@@ -30,6 +30,9 @@ const Search = ({ route }) => {
               size={20}
             />
           </View>
+        {/* </View> */}
+        <View className='flex-row flex-1'>
+          <Text className="text-white text-xl">Top Searches</Text>
         </View>
       </View>
     </MainLayout>
