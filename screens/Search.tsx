@@ -1,12 +1,8 @@
-import { View, Text, TextInput, Image } from 'react-native'
-import MainLayout from '../components/MainLayout'
-import React from 'react'
-import {
-  MagnifyingGlassIcon
-} from 'react-native-heroicons/outline';
-import {
-  MicrophoneIcon
-} from 'react-native-heroicons/solid';
+import { View, Text, TextInput, Image } from 'react-native';
+import MainLayout from '../components/MainLayout';
+import React from 'react';
+import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
+import { MicrophoneIcon } from 'react-native-heroicons/solid';
 import * as Icon from "react-native-heroicons/outline";
 
 const Search = ({ route }) => {
@@ -33,7 +29,7 @@ const Search = ({ route }) => {
           <Text className="text-white text-3xl font-bold">Top Searches</Text>
         </View>
         {
-          [1,1,1,1,1,1].map(() => <View className="flex-row bg-[#424242] pr-3 mb-2">
+          [1,1,1,1,1,1,1,1,1,1].map(() => <View className="flex-row bg-[#424242] pr-3 mb-2">
             <Image
               source={require('../assets/search-image.png')}
             />
