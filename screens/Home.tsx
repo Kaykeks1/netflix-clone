@@ -10,7 +10,7 @@ import { setHomeCategories, selectCategories, setVideoDetails } from '../feature
 import { toggleShortDetailsVisibility } from '../features/appSlice'
 
 const Home = ({route}) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Home = ({route}) => {
     }`).then(data => {
       dispatch(setHomeCategories(data))
     }).catch(e => console.log({e}))
-  }, [dispatch])
+  }, [dispatch]);
 
 
   const initialCategories = [
@@ -31,13 +31,13 @@ const Home = ({route}) => {
     { name: "Top 10 in Nigeria Today", items: [1,1,1,1,1] },
     { name: "My List", items: [1,1,1,1,1] },
     { name: "African movies", items: [1,1,1,1,1] },
-  ]
+  ];
   const [previews, setPreviews] = useState([1,1,1,1,1]);
 
   const openVideoDetails = (data) => {
     dispatch(setVideoDetails(data))
     dispatch(toggleShortDetailsVisibility())
-  }
+  };
 
   return (
     <MainLayout routeName={route.name}>
