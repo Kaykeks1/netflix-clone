@@ -32,9 +32,7 @@ export default function App() {
         await Font.loadAsync(Entypo.font);
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
-        console.log('before')
         await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log('after')
       } catch (e) {
         console.warn(e);
       } finally {
